@@ -6,10 +6,7 @@ namespace AccioBook.Domain.Interfaces.Services
     {
         Task<IEnumerable<Book>> GetBooks();
 
-        Task<Book> GetBook(int id);
-
-        Task<IEnumerable><Book>> GetBookByTitle(string title);
-
+        Task<Book> GetBook(int id);        
 
 
     }
