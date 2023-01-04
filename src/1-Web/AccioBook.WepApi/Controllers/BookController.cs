@@ -2,7 +2,6 @@
 using AccioBook.Domain.Interfaces.Services;
 using AccioBook.WepApi.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq.Expressions;
 
 namespace AccioBook.WepApi.Controllers
 {
@@ -28,10 +27,12 @@ namespace AccioBook.WepApi.Controllers
         public async Task<IActionResult> Insert(BookModel bookArgs)
         {
             var book = new Book();
+            
             book.Title = bookArgs.Title;
-            book.PageCount = bookArgs.PageCount;
-            book.PublishingDate = bookArgs.PublishingDate;
-
+            book.Id_Author = bookArgs.Id_Author;
+            book.Cover = bookArgs.Cover;
+            
+                 
             book = await _bookService.AddAndSaveAsync(book);
 
             if (book.Id != default(int))
@@ -39,25 +40,67 @@ namespace AccioBook.WepApi.Controllers
                 return Ok();
             }
 
-            return BadRequest();            
+            return BadRequest();
         }
 
         /// <summary>
-        /// Retorna uma lista de Livros 
-        /// </summary>
-        /// <param name="bookArgs"></param>
+        /// Retorna livros que o Título contém Harry Potter e número de páginas maior que 200.
+        /// </summary>     
         /// <returns></returns>
-        [HttpGet]
-        public async Task<IActionResult><IAsyncEnumerable<Book>>> GetBooks()
+
+        [HttpGet("filter")]
+        public async Task<IActionResult> GetBooksFilter()
         {
             try
-            {
-               
+            {                
+                var books =  await _bookService.GetAllAsync(l => l.Title.Contains("Harry Potter") && l.PageCount > 200);
+                return Ok(books);
             }
-            catch
+            catch(Exception ex)
             {
-
+                return BadRequest(ex.Message);
             }           
         }
+
+        /// <summary>
+        /// Retorna uma lista de Livros
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("all")]
+        public async Task<IActionResult> GetBooks()
+        {            
+            try
+            {
+                var books = await _bookService.GetAllAsync();
+                return Ok(books);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Deleta um livro 
+        /// </summary>
+        /// <returns></returns>
+        [HttpDelete("all")]
+        public async Task<IActionResult> DeleteBook(BookModel bookArgs)
+        {
+            var book = new Book();
+
+            book.Id = bookArgs.Id;
+
+            try
+            {
+                await _bookService.DeleteAsync(book.Id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }            
+           
     }
 }

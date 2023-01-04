@@ -10,8 +10,12 @@ namespace AccioBook.Data.Models.Mapping
         {
             builder.HasKey(a => a.Id);
             builder.Property(a => a.Title);
-            builder.Property(a => a.PageCount);
-            builder.Property(a => a.PublishingDate);
+            builder.Property(a => a.Id_Author);
+            builder.Property(a => a.Cover);
+
+            builder.HasOne(a => a.Author)
+               .WithMany(a => a.Books)
+               .HasForeignKey(a => a.Id_Author);
         }
     }
 }

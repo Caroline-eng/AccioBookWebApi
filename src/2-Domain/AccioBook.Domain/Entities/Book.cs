@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AccioBook.Domain.Entities
+﻿namespace AccioBook.Domain.Entities
 {
     public class Book
     {
-        public int Id { get; set; }
+        public Int64 Id { get; set; }
         public string Title { get; set; }
-
-        public int PageCount { get; set; } 
-
-        public DateTime PublishingDate { get; set; }
-
-
+        public Int64 Id_Author { get; set; }
+        public Author Author  { get; set; }        
+        public string Cover { get; set; }
+        public virtual ICollection<BookSearch> BookSearches { get; set; }
+        public virtual ICollection<Edition> Editions { get; set; }
+        public virtual WishList BookList { get; set; }
     }
 }

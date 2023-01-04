@@ -9,8 +9,6 @@ namespace AccioBook.Domain.Services
         public BookService(IBookRepository repository) : base(repository)
         {
 
-
-
         }       
     }
 }

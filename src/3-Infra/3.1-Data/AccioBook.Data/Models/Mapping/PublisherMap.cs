@@ -1,0 +1,20 @@
+﻿using AccioBook.Domain.Entities;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AccioBook.Data.Models.Mapping
+{
+    public class PublisherMap : IEntityTypeConfiguration<Publisher>
+    {
+        public void Configure(EntityTypeBuilder<Publisher> builder)
+        {
+            builder.HasKey(a => a.Id);
+            builder.Property(a => a.Name);
+        }
+    }
+}
