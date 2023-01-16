@@ -31,13 +31,18 @@ namespace AccioBook.WepApi.Controllers
             book.Title = bookArgs.Title;
             book.Id_Author = bookArgs.Id_Author;
             book.Cover = bookArgs.Cover;
-            
-                 
+
+            Author author = new Author();
+            author.Id = bookArgs.Author.Id;
+            author.Name = bookArgs.Author.Name;
+            book.Author = author;
+
+
             book = await _bookService.AddAndSaveAsync(book);
 
             if (book.Id != default(int))
             {
-                return Ok();
+                return Ok(book);
             }
 
             return BadRequest();
@@ -52,9 +57,10 @@ namespace AccioBook.WepApi.Controllers
         public async Task<IActionResult> GetBooksFilter()
         {
             try
-            {                
-                var books =  await _bookService.GetAllAsync(l => l.Title.Contains("Harry Potter") && l.PageCount > 200);
-                return Ok(books);
+            {
+                //var books =  await _bookService.GetAllAsync(l => l.Title.Contains("Harry Potter") && l.PageCount > 200);
+                //return Ok(books);
+                return Ok();
             }
             catch(Exception ex)
             {

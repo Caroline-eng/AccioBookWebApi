@@ -1,11 +1,6 @@
 ﻿using AccioBook.Domain.Entities;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AccioBook.Data.Models.Mapping
 {
@@ -19,13 +14,13 @@ namespace AccioBook.Data.Models.Mapping
             builder.Property(a => a.IncludeDate);
 
             builder.HasOne(a => a.User)
-               .WithOne(a => a.UserList)
+               .WithMany(a => a.WishLists)
                .HasForeignKey(a => a.Id_User);
 
-
-            builder.HasMany(a => a.Book)
-               .WithMany(a => a.BookList)
-               .HasForeignKey(a => a.Id_Book);
+            builder               
+               .HasOne(a => a.Book)
+               .WithMany(a => a.WishLists)
+               .HasForeignKey(a => a.Id_Book); 
         }
     }
 }

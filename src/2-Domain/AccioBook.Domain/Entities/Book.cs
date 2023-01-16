@@ -9,6 +9,6 @@
         public string Cover { get; set; }
         public virtual ICollection<BookSearch> BookSearches { get; set; }
         public virtual ICollection<Edition> Editions { get; set; }
-        public virtual WishList BookList { get; set; }
+        public virtual ICollection<WishList> WishLists { get; set; }
     }
 }

@@ -1,9 +1,10 @@
-﻿namespace AccioBook.WepApi.Models
+﻿using AccioBook.Domain.Entities;
+
+namespace AccioBook.WepApi.Models
 {
     public class AuthorModel
     {
-        public int Id_Author { get; set; }
-        public string Name_Author { get; set; }
-        public int Id_Book { get; set; }
+        public Int64 Id { get; set; }
+        public string Name { get; set; }
     }
 }

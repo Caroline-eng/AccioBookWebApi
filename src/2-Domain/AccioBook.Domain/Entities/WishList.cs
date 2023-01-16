@@ -8,7 +8,5 @@
         public Int64 Id_Book { get; set; }
         public Book Book { get; set; }
         public DateTime IncludeDate  { get; set; }
-                   
-
     }
 }

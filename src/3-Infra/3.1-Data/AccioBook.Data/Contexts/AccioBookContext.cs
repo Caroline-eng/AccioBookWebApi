@@ -1,4 +1,5 @@
-﻿using AccioBook.Domain.Entities;
+﻿using AccioBook.Data.Models.Mapping;
+using AccioBook.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace AccioBook.Data.Contexts
@@ -21,7 +22,16 @@ namespace AccioBook.Data.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+            modelBuilder.ApplyConfiguration(new AuthorMap());
+            modelBuilder.ApplyConfiguration(new AuthorSearchMap());
+            modelBuilder.ApplyConfiguration(new BookMap());
+            modelBuilder.ApplyConfiguration(new BookSearchMap());
+            modelBuilder.ApplyConfiguration(new EditionMap());
+            modelBuilder.ApplyConfiguration(new LanguageMap());
+            modelBuilder.ApplyConfiguration(new PublisherMap());
+            modelBuilder.ApplyConfiguration(new UserMap());
+            modelBuilder.ApplyConfiguration(new WishListMap());
+
         }
     }
 }

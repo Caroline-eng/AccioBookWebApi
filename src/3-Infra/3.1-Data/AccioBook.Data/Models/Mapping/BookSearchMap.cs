@@ -1,11 +1,6 @@
 ﻿using AccioBook.Domain.Entities;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AccioBook.Data.Models.Mapping
 {
@@ -23,7 +18,7 @@ namespace AccioBook.Data.Models.Mapping
                .HasForeignKey(a => a.Id_Book);
 
             builder.HasOne(a => a.User)
-               .WithMany(a => a.UserSearches)
+               .WithMany(a => a.BookSearches)
                .HasForeignKey(a => a.Id_User);
         }
     }

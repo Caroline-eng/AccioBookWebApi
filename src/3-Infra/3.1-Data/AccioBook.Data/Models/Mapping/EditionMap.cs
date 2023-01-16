@@ -27,11 +27,11 @@ namespace AccioBook.Data.Models.Mapping
              .HasForeignKey(a => a.Id_Book);
 
             builder.HasOne(a => a.Publisher)
-               .WithMany(a => a.EditionsPub)
+               .WithMany(a => a.Editions)
                .HasForeignKey(a => a.Id_Publisher);
 
             builder.HasOne(a => a.Language)
-               .WithMany(a => a.EditionsLang)
+               .WithMany(a => a.Editions)
                .HasForeignKey(a => a.Id_Language);
         }
     }

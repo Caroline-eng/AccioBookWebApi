@@ -9,7 +9,7 @@ namespace AccioBook.Data.Models.Mapping
         public void Configure(EntityTypeBuilder<Author> builder)
         {
             builder.HasKey(a => a.Id);
-            builder.Property(a => a.Name);                    
+            builder.Property(a => a.Name);                       
         }
     }
 }
