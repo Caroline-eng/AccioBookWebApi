@@ -14,5 +14,7 @@ namespace AccioBook.Domain.Entities
         public virtual ICollection<BookSearch> BookSearches { get; set; }
         public virtual ICollection<AuthorSearch> AuthorSearches { get; set; }
         public virtual ICollection<WishList> WishLists { get; set; }
+        public virtual ICollection<Access> AccessA { get; set; }
+        public virtual ICollection<GenreSearch> GenreSearches { get; set; }
     }
 } 
