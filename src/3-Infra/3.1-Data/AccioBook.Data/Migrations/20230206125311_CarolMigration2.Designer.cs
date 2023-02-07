@@ -3,6 +3,7 @@ using System;
 using AccioBook.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AccioBook.Data.Migrations
 {
     [DbContext(typeof(AccioBookContext))]
-    partial class AccioBookContextModelSnapshot : ModelSnapshot
+    [Migration("20230206125311_CarolMigration2")]
+    partial class CarolMigration2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,9 +37,12 @@ namespace AccioBook.Data.Migrations
                     b.Property<long>("Id_User")
                         .HasColumnType("bigint");
 
+                    b.Property<long?>("UserId")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("Id_User");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Access");
                 });
@@ -85,6 +91,9 @@ namespace AccioBook.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
+                    b.Property<string>("Cover")
+                        .HasColumnType("longtext");
+
                     b.Property<long>("Id_Author")
                         .HasColumnType("bigint");
 
@@ -132,9 +141,6 @@ namespace AccioBook.Data.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
-
-                    b.Property<string>("Cover")
-                        .HasColumnType("longtext");
 
                     b.Property<string>("ISBNCode_10")
                         .HasColumnType("longtext");
@@ -188,19 +194,25 @@ namespace AccioBook.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
+                    b.Property<long?>("GenreId")
+                        .HasColumnType("bigint");
+
                     b.Property<long>("Id_Genre")
                         .HasColumnType("bigint");
 
                     b.Property<long>("Id_User")
                         .HasColumnType("bigint");
 
+                    b.Property<long?>("UserId")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("Id_Genre");
+                    b.HasIndex("GenreId");
 
-                    b.HasIndex("Id_User");
+                    b.HasIndex("UserId");
 
-                    b.ToTable("GenresSearch");
+                    b.ToTable("GenreSearch");
                 });
 
             modelBuilder.Entity("AccioBook.Domain.Entities.Language", b =>
@@ -288,9 +300,7 @@ namespace AccioBook.Data.Migrations
                 {
                     b.HasOne("AccioBook.Domain.Entities.User", "User")
                         .WithMany("AccessA")
-                        .HasForeignKey("Id_User")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });
@@ -383,15 +393,11 @@ namespace AccioBook.Data.Migrations
                 {
                     b.HasOne("AccioBook.Domain.Entities.Genre", "Genre")
                         .WithMany("GenreSearches")
-                        .HasForeignKey("Id_Genre")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("GenreId");
 
                     b.HasOne("AccioBook.Domain.Entities.User", "User")
                         .WithMany("GenreSearches")
-                        .HasForeignKey("Id_User")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Genre");
 

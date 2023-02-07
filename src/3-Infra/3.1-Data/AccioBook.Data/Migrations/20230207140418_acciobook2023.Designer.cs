@@ -3,6 +3,7 @@ using System;
 using AccioBook.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AccioBook.Data.Migrations
 {
     [DbContext(typeof(AccioBookContext))]
-    partial class AccioBookContextModelSnapshot : ModelSnapshot
+    [Migration("20230207140418_acciobook2023")]
+    partial class acciobook2023
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -16,7 +16,8 @@ namespace AccioBook.Data.Models.Mapping
             builder.HasKey(a => a.Id);
             builder.Property(a => a.Id_Book);
             builder.Property(a => a.Id_Publisher);
-            builder.Property(a => a.Id_Language);                     
+            builder.Property(a => a.Id_Language);
+            builder.Property(a => a.Cover);
             builder.Property(a => a.PublicationDate);
             builder.Property(a => a.PageCount);          
             builder.Property(a => a.ISBNCode_10);

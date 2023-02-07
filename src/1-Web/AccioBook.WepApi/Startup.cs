@@ -1,5 +1,9 @@
 ﻿using AccioBook.CrossCutting.IoC.Bootstrappers;
 using AccioBook.CrossCutting.IoC.Logging;
+using AccioBook.Data.Repositories;
+using AccioBook.Domain.Interfaces.Repositories;
+using AccioBook.Domain.Interfaces.Services;
+using AccioBook.Domain.Services;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
@@ -19,8 +23,8 @@ namespace AccioBook.WepApi
         public void ConfigureServices(IServiceCollection services)
         {
             SerilogExtension.AddLogging(ConfigRoot);
-            services.AddControllers();
-                    //.AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);             
+            services.AddControllers()
+                    .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);             
 
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen( c =>
@@ -32,6 +36,22 @@ namespace AccioBook.WepApi
             });
 
             services.AddDependencies(ConfigRoot);
+
+            services.AddTransient<IAuthorService, AuthorService>();
+            services.AddTransient<IGenreService, GenreService>();
+            services.AddTransient<IEditionService, EditionService>();
+            services.AddTransient<ILanguageService, LanguageService>();
+            services.AddTransient<IPublisherService, PublisherService>();
+
+
+            services.AddTransient<IAuthorRepository, AuthorRepository>();           
+            services.AddTransient<IGenreRepository, GenreRepository>();
+            services.AddTransient<IEditionRepository, EditionRepository>();
+            services.AddTransient<ILanguageRepository, LanguageRepository>();
+            services.AddTransient<IPublisherRepository, PublisherRepository>();
+
+
+            //services.AddScoped<IAuthorService, AuthorService>(); //não sei se está certo
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment env) 
