@@ -9,6 +9,20 @@ namespace AccioBook.Domain.Services
         public BookService(IBookRepository repository) : base(repository)
         {
 
-        }       
+        }
+
+        public async Task<IEnumerable<Book>> GetAllWithAuthorAndGenreAsync()
+        {
+            var repo = (IBookRepository) _repository;
+
+            return await repo.GetAllWithAuthorAndGenreAsync();
+        }
+
+        public async Task<IEnumerable<Book>> GetBooksByAuthorAsync(string authorName)
+        {
+            var repo = (IBookRepository)_repository;
+
+            return await repo.GetBooksByAuthorAsync(authorName);
+        }
     }
 }

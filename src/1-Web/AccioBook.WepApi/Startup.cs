@@ -50,6 +50,14 @@ namespace AccioBook.WepApi
             services.AddTransient<ILanguageRepository, LanguageRepository>();
             services.AddTransient<IPublisherRepository, PublisherRepository>();
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.WithOrigins("*")
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
+            });
 
             //services.AddScoped<IAuthorService, AuthorService>(); //não sei se está certo
         }
@@ -64,10 +72,10 @@ namespace AccioBook.WepApi
 
             app.UseRewriter(new RewriteOptions().AddRedirect("^$", "swagger"));
             app.UseHttpsRedirection();
+            app.UseCors("CorsPolicy");
             app.UseAuthorization();
             app.MapControllers();
-            app.Run();
-        
+            app.Run();          
         }
     }
 }

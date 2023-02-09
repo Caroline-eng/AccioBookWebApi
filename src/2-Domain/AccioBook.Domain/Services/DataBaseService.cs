@@ -39,6 +39,7 @@ namespace AccioBook.Domain.Services
         {
             var entity = await _repository.GetAsync(id);
             await DeleteAsync(entity);
+            await SaveChangesAsync();
         }
 
         public async Task DeleteAsync(IEnumerable<TEntity> entities)

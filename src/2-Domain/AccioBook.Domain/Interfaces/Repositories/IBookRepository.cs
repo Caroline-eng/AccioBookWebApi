@@ -4,6 +4,7 @@ namespace AccioBook.Domain.Interfaces.Repositories
 {
     public interface IBookRepository : IRepository<Book>
     {
-
+        Task<IQueryable<Book>> GetAllWithAuthorAndGenreAsync();
+        Task<IQueryable<Book>> GetBooksByAuthorAsync(string authorName);
     }
 }
