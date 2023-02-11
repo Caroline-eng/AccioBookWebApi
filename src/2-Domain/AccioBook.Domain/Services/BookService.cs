@@ -24,5 +24,13 @@ namespace AccioBook.Domain.Services
 
             return await repo.GetBooksByAuthorAsync(authorName);
         }
+
+        public async Task<IEnumerable<Book>> GetBooksByTitleAsync(string bookTitle)
+        {
+            var repo = (IBookRepository)_repository;
+
+            return await repo.GetBooksByTitleAsync(bookTitle);
+
+        }
     }
 }

@@ -29,5 +29,14 @@ namespace AccioBook.Data.Repositories
 
             return Task.Run(() => { return entities.Where(x => x.Author.Name.Equals(authorName) || x.Author.Name.Contains(authorName)); });
         }
+
+        public Task<IQueryable<Book>> GetBooksByTitleAsync(string bookTitle)
+        {
+            var context = (AccioBookContext)_context;
+            var entities = context.Books.Include(x => x.Author).Include(x => x.Genre).AsNoTracking();
+
+            return Task.Run(() => { return entities.Where(x => x.Title.Equals(bookTitle) || x.Title.Contains(bookTitle)); });
+
+        }
     }
 }

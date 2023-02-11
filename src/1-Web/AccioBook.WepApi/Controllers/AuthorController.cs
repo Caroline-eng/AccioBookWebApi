@@ -19,20 +19,19 @@ namespace AccioBook.WepApi.Controllers
         public AuthorController(IAuthorService authorService)
         {
             _authorService = authorService;
-        }     
+        }
 
         /// <summary>
         /// Insere um novo autor no banco.
         /// </summary>     
-        /// <returns></returns>
-
+        /// <returns></returns>        
         [HttpPost("insert")]
-        public async Task<IActionResult> InsertAuthor(AuthorModel authorArgs)
+        public async Task<IActionResult> Insert(AuthorModel authorArgs)
         {
             var author = new Author();
 
-            author.Id = authorArgs.Id;
             author.Name = authorArgs.Name;
+
 
             author = await _authorService.AddAndSaveAsync(author);
 

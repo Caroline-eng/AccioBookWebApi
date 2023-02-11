@@ -33,7 +33,8 @@ namespace AccioBook.WepApi.Controllers
 
             book.Title = bookArgs.Title;
             book.Id_Author = bookArgs.Id_Author;
-            book.Id_Genre = bookArgs.Id_Genre;                   
+            book.Id_Genre = bookArgs.Id_Genre;
+            book.Description = bookArgs.Description;
 
             book = await _bookService.AddAndSaveAsync(book);
 
@@ -121,6 +122,24 @@ namespace AccioBook.WepApi.Controllers
             }
         }
 
+
+        /// <summary>
+        ///Pesquisa por livro
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("search/{bookTitle}")]
+        public async Task<IActionResult> GetBooksByTitle(string bookTitle)
+        {
+            try
+            {
+                var book = await _bookService.GetBooksByTitleAsync(bookTitle);
+                return Ok(book);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
 
 

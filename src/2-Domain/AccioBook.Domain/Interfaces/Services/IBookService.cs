@@ -6,5 +6,6 @@ namespace AccioBook.Domain.Interfaces.Services
     {
         Task <IEnumerable<Book>> GetAllWithAuthorAndGenreAsync();
         Task <IEnumerable<Book>> GetBooksByAuthorAsync(string authorName);
+        Task <IEnumerable<Book>> GetBooksByTitleAsync(string bookTitle);
     }
 }

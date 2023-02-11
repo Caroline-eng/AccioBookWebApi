@@ -6,7 +6,8 @@ namespace AccioBook.WepApi.Models
     {
         public string Title { get; set; }
         public Int64 Id_Author { get; set; }
-        public Int64 Id_Genre { get; set; }        
+        public Int64 Id_Genre { get; set; }         
+        public string Description { get; set; }        
                
     }
 }
