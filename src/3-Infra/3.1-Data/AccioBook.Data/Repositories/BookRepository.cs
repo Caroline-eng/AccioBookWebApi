@@ -38,5 +38,13 @@ namespace AccioBook.Data.Repositories
             return Task.Run(() => { return entities.Where(x => x.Title.Equals(bookTitle) || x.Title.Contains(bookTitle)); });
 
         }
+
+        public Task<IQueryable<Book>> GetLastBooksTop100()
+        {
+            var context = (AccioBookContext)_context;
+            var entities = context.Books.Include(x => x.Author).Include(x => x.Genre).AsNoTracking();
+            return Task.Run(() => { return entities.OrderByDescending(x => x.Id).Take(100); }) ;
+
+        }
     }
 }

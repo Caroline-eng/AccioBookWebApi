@@ -70,6 +70,24 @@ namespace AccioBook.WepApi.Controllers
         /// Retorna toda lista de Livros
         /// </summary>
         /// <returns></returns>
+        [HttpGet("all-last-100")]
+        public async Task<IActionResult> GetBooksLast100()
+        {
+            try
+            {
+                var books = await _bookService.GetLastBooksTop100();
+                return Ok(books);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Retorna toda lista de Livros
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("all")]
         public async Task<IActionResult> GetBooks()
         {
@@ -122,7 +140,6 @@ namespace AccioBook.WepApi.Controllers
             }
         }
 
-
         /// <summary>
         ///Pesquisa por livro
         /// </summary>
@@ -140,154 +157,5 @@ namespace AccioBook.WepApi.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
-
-
-
-
-
-
-
-
-        ///// <summary>
-        ///// Atualiza um livro existente no banco
-        ///// </summary>
-        ///// <returns></returns>
-        //[HttpPut("update")]
-        //public async Task<IActionResult> Update(BookModel bookArgs)
-        //{
-        //    var book = await _bookService.GetAsync(bookArgs.Id);
-
-        //    if (book == null)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    book.Title = bookArgs.Title;
-        //    book.Id_Author = bookArgs.Id_Author;
-        //    book.Id_Genre = bookArgs.Id_Genre;
-
-
-        //    Author author = new Author();
-        //    author.Id = bookArgs.Author.Id;
-        //    author.Name = bookArgs.Author.Name;
-        //    book.Author = author;
-
-        //    Genre genre = new Genre();
-        //    genre.Id = bookArgs.Genre.Id;
-        //    genre.Name = bookArgs.Genre.Name;
-        //    book.Genre = genre;
-
-        //    await _bookService.UpdateAsync(book);
-
-        //    return Ok(book);
-        //}
-
-
-
-
-
-
-
-        ///// <summary>
-        ///// Obtém livros de um autor específico
-        ///// </summary>
-        ///// <param name="authorId">Id do autor</param>
-        ///// <returns></returns>
-        //[HttpGet("GetBooksByAuthor/{authorId}")]
-        //public async Task<IActionResult> GetBooksByAuthor(int authorId)
-        //{
-        //    var books = await _bookService.GetAsync(authorId);
-
-        //    if (books == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return Ok(books);
-        //}
-
-
-        ///// <summary>
-        ///// Obtém livros por título
-        ///// </summary>        
-        ///// <returns></returns>
-        //[HttpGet("GetBooksByTitle/{title}")]
-        //public async Task<IActionResult> GetBooksByTitle(string title)
-        //{
-        //    var books = await _bookService.GetAsync(l => l.Title.Equals(title) || l.Title.Contains(title));
-
-        //    if (books == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return Ok(books);
-        //}
-
-
-        ///// <summary>
-        ///// Obtém livros por ISBN
-        ///// </summary>        
-        ///// <returns>Lista de livros escritos pelo autor</returns>
-        //[HttpGet("GetBooksByISBN/{ISBN}")]
-        //public async Task<IActionResult> GetBooksByISBN(string ISBN)
-        //{
-        //    try
-        //    {
-
-
-        //        var edition = await _editionService.GetAllAsync(e => e.ISBNCode_10 == ISBN || e.ISBNCode_13 == ISBN);
-
-        //        if (!edition.Any())
-        //        {
-        //            return null;
-        //        }
-
-        //        var books = await _bookService.GetAsync(b => b.Editions == edition);
-
-
-        //        if (books == null)
-        //        {
-        //            return NotFound();
-        //        }
-
-        //        return Ok(books);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-        //}
-
-
-
-
-
-        ///// <summary>
-        ///// Obtém livros por Gênero
-        ///// </summary>        
-        ///// <returns>Lista de livros escritos pelo autor</returns>
-        //[HttpGet("GetBooksByGenre/{IdGenre}")]
-        //public async Task<IActionResult> GetBooksByGenre(int IdGenre)
-        //{
-        //    try
-        //    {
-        //        var books = await _bookService.GetAsync(IdGenre);
-
-        //        if (books == null)
-        //        {
-        //            return NotFound();
-        //        }
-
-        //        return Ok(books);
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-        //}
-
     }
 }
