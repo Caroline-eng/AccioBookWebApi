@@ -10,7 +10,9 @@ namespace AccioBook.Data.Models.Mapping
         {
             builder.HasKey(a => a.Id);
             builder.Property(a => a.Id_Author);
+            builder.Property(a => a.SearchDate);
             builder.Property(a => a.Id_User);
+
 
             builder.HasOne(a => a.Author)
                 .WithMany(a => a.AuthorSearches)
