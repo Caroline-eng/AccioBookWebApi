@@ -23,8 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\2-Domain\AccioBook.Domain\AccioBook.Domain.csproj" />
-    <ProjectReference Include="..\src\3-Infra\3.1-Data\AccioBook.Data\AccioBook.Data.csproj" />
+    <ProjectReference Include="..\..\..\src\1-Web\AccioBook.WepApi\AccioBook.WepApi.csproj" />
+    <ProjectReference Include="..\..\..\src\2-Domain\AccioBook.Domain\AccioBook.Domain.csproj" />
+    <ProjectReference Include="..\..\..\src\3-Infra\3.1-Data\AccioBook.Data\AccioBook.Data.csproj" />
   </ItemGroup>
 
 </Project>
