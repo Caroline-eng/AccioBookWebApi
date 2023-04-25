@@ -43,6 +43,68 @@ namespace AccioBook.WepApi.Controllers
             return BadRequest();
         }
 
+       
+
+        /// <summary>
+        /// Deleta um autor do banco
+        /// </summary>
+        /// <returns></returns>
+        [HttpDelete("delete/{authorId}")]
+        public async Task<IActionResult> DeleteAuthor(Int64 authorId)
+        {
+
+            try
+            {
+                await _authorService.DeleteAsync(authorId);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        ///Altera um autor no banco
+        /// </summary>
+        /// <returns></returns>
+        [HttpPut("update/{authorId}")]
+        public async Task<IActionResult> UpdateAuthor(Int64 authorId, AuthorModel authorArgs)
+        {
+
+            var author = await _authorService.GetAsync(authorId);
+
+            if (author == null)
+            {
+                return NotFound();
+            }
+
+            author.Name = authorArgs.Name;
+            
+
+            await _authorService.UpdateAndSaveAsync(author);
+
+            return Ok(author);
+        }
+
+        /// <summary>
+        /// Retorna os últimos 100 autores 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("all-last-100")]
+        public async Task<IActionResult> GetAuthorsLast100()
+        {
+            try
+            {
+                var author = await _authorService.GetLastAuthorsTop100();
+                return Ok(author);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         /// <summary>
         /// Retorna toda lista de Autores
         /// </summary>
@@ -61,7 +123,23 @@ namespace AccioBook.WepApi.Controllers
             }
         }
 
-
+        /// <summary>
+        ///Pesquisa por autor
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("search/{authorName}")]
+        public async Task<IActionResult> GetAuthorByName(string authorName)
+        {
+            try
+            {
+                var author = await _authorService.GetAuthorByNameAsync(authorName);
+                return Ok(author);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
 
     }

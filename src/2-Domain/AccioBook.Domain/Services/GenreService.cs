@@ -15,5 +15,17 @@ namespace AccioBook.Domain.Services
         {
 
         }
+
+        public async Task<IEnumerable<Genre>> GetGenreByNameAsync(string genreName)
+        {
+            var repo = (IGenreRepository)_repository;
+            return await repo.GetGenreByNameAsync(genreName);
+        }
+
+        public async Task<IEnumerable<Genre>> GetLastGenreTop100()
+        {
+            var repo = (IGenreRepository)_repository;
+            return await repo.GetLastGenreTop100();
+        }
     }
 }
