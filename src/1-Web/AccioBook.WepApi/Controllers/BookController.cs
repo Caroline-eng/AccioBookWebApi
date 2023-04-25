@@ -1,8 +1,11 @@
 ﻿using AccioBook.Domain.Entities;
 using AccioBook.Domain.Interfaces.Services;
+using AccioBook.Domain.Services;
 using AccioBook.WepApi.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace AccioBook.WepApi.Controllers
 {
@@ -14,11 +17,11 @@ namespace AccioBook.WepApi.Controllers
     [EnableCors("CorsPolicy")]
     public class BookController : ControllerBase
     {
-        private readonly IBookService _bookService;    
-      
+        private readonly IBookService _bookService;        
+
         public BookController(IBookService bookService)
         {
-            _bookService = bookService;           
+            _bookService = bookService;            
         }
 
         /// <summary>
@@ -67,7 +70,144 @@ namespace AccioBook.WepApi.Controllers
         }
 
         /// <summary>
-        /// Retorna toda lista de Livros
+        ///Altera um livro no banco
+        /// </summary>
+        /// <returns></returns>
+        [HttpPut("update/{bookId}")]
+        public async Task<IActionResult> Update(Int64 bookId, BookModel bookArgs)
+        {           
+
+            var book = await _bookService.GetAsync(bookId);
+
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            book.Title = bookArgs.Title;            
+            book.Id_Author = bookArgs.Id_Author;
+            book.Id_Genre = bookArgs.Id_Genre;
+            book.Description = bookArgs.Description;
+
+            await _bookService.UpdateAndSaveAsync(book);
+
+            return Ok(book);
+        }       
+
+        /// <summary>
+        ///Altera o título do livro no banco
+        /// </summary>
+        /// <returns></returns>
+        [HttpPut("update/title/{bookId}")]
+        public async Task<IActionResult> UpdateBookTitle(Int64 bookId, [FromBody] BookModel bookArgs)
+        {
+            try
+            {
+                var book = await _bookService.GetAsync(bookId);
+
+                if (book == null)
+                {
+                    return NotFound();
+                }
+
+                book.Title = bookArgs.Title;
+
+                await _bookService.UpdateAndSaveAsync(book);
+
+                return Ok(book);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        ///Altera a descrição do livro no banco
+        /// </summary>
+        /// <returns></returns>
+        [HttpPut("update/description/{bookId}")]
+        public async Task<IActionResult> UpdateBookDescription(Int64 bookId, [FromBody] BookModel bookArgs)
+        {
+            try
+            {
+                var book = await _bookService.GetAsync(bookId);
+
+                if (book == null)
+                {
+                    return NotFound();
+                }
+
+                book.Description = bookArgs.Description;
+
+                await _bookService.UpdateAndSaveAsync(book);
+
+                return Ok(book);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        ///Altera o gênero do livro no banco
+        /// </summary>
+        /// <returns></returns>
+        [HttpPut("update/genre/{bookId}")]
+        public async Task<IActionResult> UpdateBookGenre(Int64 bookId, [FromBody] BookModel bookArgs)
+        {
+            try
+            {
+                var book = await _bookService.GetAsync(bookId);
+
+                if (book == null)
+                {
+                    return NotFound();
+                }
+               
+                book.Id_Genre = bookArgs.Id_Genre;
+
+                await _bookService.UpdateAndSaveAsync(book);
+
+                return Ok(book);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        ///Altera o autor do livro no banco
+        /// </summary>
+        /// <returns></returns>       
+        [HttpPut("update/author/{bookId}")]
+        public async Task<IActionResult> UpdateBookAuthor(Int64 bookId, [FromBody] BookModel bookArgs)
+        {
+            try
+            {
+                var book = await _bookService.GetAsync(bookId);
+
+                if (book == null)
+                {
+                    return NotFound();
+                }              
+                               
+                book.Id_Author = bookArgs.Id_Author;
+
+                await _bookService.UpdateAndSaveAsync(book);
+
+                return Ok(book);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }       
+
+        /// <summary>
+        /// Retorna os últimos 100 livros 
         /// </summary>
         /// <returns></returns>
         [HttpGet("all-last-100")]
@@ -120,7 +260,7 @@ namespace AccioBook.WepApi.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
+           
 
         /// <summary>
         /// Retorna lista de livros por autor 
@@ -157,5 +297,29 @@ namespace AccioBook.WepApi.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        /// <summary>
+        ///Pesquisa de livro com parâmetros
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("searchParams/{filter}")]
+        public async Task<IActionResult> GetBooksByParams(string filter)
+        {
+
+            try
+            {
+                var book = await _bookService.GetBooksByParamsAsync(filter);
+                return Ok(book);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+
+
+
     }
 }

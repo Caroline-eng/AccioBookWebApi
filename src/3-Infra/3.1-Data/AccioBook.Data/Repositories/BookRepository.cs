@@ -2,6 +2,8 @@
 using AccioBook.Domain.Entities;
 using AccioBook.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace AccioBook.Data.Repositories
 {
@@ -36,6 +38,22 @@ namespace AccioBook.Data.Repositories
             var entities = context.Books.Include(x => x.Author).Include(x => x.Genre).AsNoTracking();
 
             return Task.Run(() => { return entities.Where(x => x.Title.Equals(bookTitle) || x.Title.Contains(bookTitle)); });
+
+        }
+
+        public Task<IQueryable<Book>> GetBooksByParamsAsync(string filter)
+        {
+            var context = (AccioBookContext)_context;
+            var entities = context.Books.Include(x => x.Author).Include(x => x.Genre).AsNoTracking();
+            if (!string.IsNullOrEmpty(filter))
+            {
+                entities = entities.Where(b => b.Title.Contains(filter) ||
+                    b.Author.Name.Contains(filter) ||
+                    b.Genre.Name.Contains(filter) ||
+                    b.Description.Contains(filter));
+            }
+
+            return Task.Run(() => { return entities; });
 
         }
 

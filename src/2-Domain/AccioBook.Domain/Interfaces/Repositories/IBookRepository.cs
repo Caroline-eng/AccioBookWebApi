@@ -6,6 +6,7 @@ namespace AccioBook.Domain.Interfaces.Repositories
     {
         Task<IQueryable<Book>> GetAllWithAuthorAndGenreAsync();
         Task<IQueryable<Book>> GetBooksByAuthorAsync(string authorName);
+        Task<IQueryable<Book>> GetBooksByParamsAsync(string filter);
         Task<IQueryable<Book>> GetBooksByTitleAsync(string bookTitle);
         Task<IQueryable<Book>> GetLastBooksTop100();
     }

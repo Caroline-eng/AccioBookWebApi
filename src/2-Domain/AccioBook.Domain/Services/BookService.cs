@@ -31,6 +31,12 @@ namespace AccioBook.Domain.Services
             return await repo.GetBooksByTitleAsync(bookTitle);
         }
 
+        public async Task<IEnumerable<Book>> GetBooksByParamsAsync(string filter)
+        {
+            var repo = (IBookRepository)_repository;
+            return await repo.GetBooksByParamsAsync(filter);
+        }
+
         public async Task<IEnumerable<Book>> GetLastBooksTop100()
         {
             var repo = (IBookRepository)_repository;
