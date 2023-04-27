@@ -12,7 +12,7 @@ namespace AccioBook.WepApi.Models
         public UserGender UserGender { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Email { get; set; }
-        public virtual ICollection<BookSearch> UserSearches { get; set; }
+        //public virtual ICollection<BookSearch> UserSearches { get; set; }
 
        
     }

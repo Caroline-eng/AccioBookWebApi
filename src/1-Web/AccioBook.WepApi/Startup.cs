@@ -42,13 +42,14 @@ namespace AccioBook.WepApi
             services.AddTransient<IEditionService, EditionService>();
             services.AddTransient<ILanguageService, LanguageService>();
             services.AddTransient<IPublisherService, PublisherService>();
-
+            services.AddTransient<IUserService, UserService>();
 
             services.AddTransient<IAuthorRepository, AuthorRepository>();           
             services.AddTransient<IGenreRepository, GenreRepository>();
             services.AddTransient<IEditionRepository, EditionRepository>();
             services.AddTransient<ILanguageRepository, LanguageRepository>();
             services.AddTransient<IPublisherRepository, PublisherRepository>();
+            services.AddTransient<IUserRepository, UserRepository> ();
 
             services.AddCors(options =>
             {
