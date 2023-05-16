@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{73B7F974-842C-487F-B9B3-066C271C30C8}"
+	ProjectSection(SolutionItems) = preProject
+		swagger.json = swagger.json
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-Web", "1-Web", "{6F8242FF-C371-4D74-BABE-443826CD2101}"
 EndProject
@@ -29,13 +32,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-Web", "1-Web", "{C70079FC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccioBook.WepApi.Test", "test\1-Web\AccioBook.WepApi.Test\AccioBook.WepApi.Test.csproj", "{2D675AC1-7F3B-4E1F-9864-E5BE5361F375}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccioBook.CrossCutting.Criptografy", "src\3-Infra\3.2-CrossCutting\AccioBook.CrossCutting.Criptografy\AccioBook.CrossCutting.Criptografy.csproj", "{4B1C1B23-D6A1-4F82-97EB-52C2A49C83EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccioBook.CrossCutting.Criptografy", "src\3-Infra\3.2-CrossCutting\AccioBook.CrossCutting.Criptografy\AccioBook.CrossCutting.Criptografy.csproj", "{4B1C1B23-D6A1-4F82-97EB-52C2A49C83EF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-Infra", "3-Infra", "{D791F76B-4D1D-48FA-90D7-81C948F45D22}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.2-CrossCutting", "3.2-CrossCutting", "{FC977282-C0D9-4DBB-A7FA-C32CA3887D8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccioBook.CrossCutting.Criptografy.Test", "test\3-Infra\3.2-CrossCutting\AccioBook.CrossCutting.Criptografy.Test\AccioBook.CrossCutting.Criptografy.Test.csproj", "{E16EFD6E-99F6-4989-94BB-E8BF021E4002}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccioBook.CrossCutting.Criptografy.Test", "test\3-Infra\3.2-CrossCutting\AccioBook.CrossCutting.Criptografy.Test\AccioBook.CrossCutting.Criptografy.Test.csproj", "{E16EFD6E-99F6-4989-94BB-E8BF021E4002}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
