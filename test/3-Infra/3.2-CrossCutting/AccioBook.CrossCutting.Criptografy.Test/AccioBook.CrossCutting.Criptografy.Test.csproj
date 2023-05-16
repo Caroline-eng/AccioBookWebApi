@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\src\1-Web\AccioBook.WepApi\AccioBook.WepApi.csproj" />
+    <ProjectReference Include="..\..\..\..\src\3-Infra\3.2-CrossCutting\AccioBook.CrossCutting.Criptografy\AccioBook.CrossCutting.Criptografy.csproj" />
+  </ItemGroup>
+
+</Project>

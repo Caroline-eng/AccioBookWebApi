@@ -10,5 +10,11 @@ namespace AccioBook.Domain.Services
         {
 
         }
+
+        public async Task<User> GetUserByEmail(string email)
+        {
+            var repo = (IUserRepository)_repository;
+            return await repo.GetUserByEmail(email);
+        }
     }
 }

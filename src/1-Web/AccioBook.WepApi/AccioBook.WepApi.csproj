@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\3-Infra\3.2-CrossCutting\AccioBook.CrossCutting.Criptografy\AccioBook.CrossCutting.Criptografy.csproj" />
     <ProjectReference Include="..\..\3-Infra\3.2-CrossCutting\AccioBook.CrossCutting.IoC\AccioBook.CrossCutting.IoC.csproj" />
   </ItemGroup>
 
