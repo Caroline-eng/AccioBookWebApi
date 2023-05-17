@@ -85,6 +85,9 @@ namespace AccioBook.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext");
+
                     b.Property<long>("Id_Author")
                         .HasColumnType("bigint");
 

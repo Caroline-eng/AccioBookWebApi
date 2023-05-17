@@ -7,7 +7,8 @@
         public Int64 Id_Author { get; set; }
         public Author Author  { get; set; }
         public Int64 Id_Genre { get; set; }
-        public Genre Genre { get; set; }        
+        public Genre Genre { get; set; }
+        public String Description { get; set; }
         public virtual ICollection<BookSearch> BookSearches { get; set; }
         public virtual ICollection<Edition> Editions { get; set; }
         public virtual ICollection<WishList> WishLists { get; set; }
