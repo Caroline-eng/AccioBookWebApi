@@ -14,7 +14,8 @@ namespace AccioBook.CrossCutting.IoC.Bootstrappers
         public static IServiceCollection AddDependencies(this IServiceCollection services, IConfiguration configuration)
         {
 
-            var connStr = configuration.GetConnectionString("AccioBookDatabase");
+            //var connStr = configuration.GetConnectionString("AccioBookDatabase");
+            var connStr = configuration.GetConnectionString("ClearDBConnection");
             services.AddDbContext<AccioBookContext>(ops => ops.UseMySql(connStr, ServerVersion.AutoDetect(connStr)));
 
             services.AddScoped<IBookRepository, BookRepository>();
