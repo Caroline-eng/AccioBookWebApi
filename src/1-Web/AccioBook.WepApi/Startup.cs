@@ -11,6 +11,8 @@ using System.Text.Json.Serialization;
 using AccioBook.Data.Contexts;
 using Pomelo.EntityFrameworkCore.MySql;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace AccioBook.WepApi
 {
@@ -29,7 +31,9 @@ namespace AccioBook.WepApi
 
             // Configurar o serviço de banco de dados usando a string de conexão
             services.AddDbContext<AccioBookContext>(options =>
-                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+            options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+            //options.UseSqlServer(connectionString, b => b.MigrationsAssembly("AccioBook.Data")));
+
 
             SerilogExtension.AddLogging(ConfigRoot);
             services.AddControllers()
