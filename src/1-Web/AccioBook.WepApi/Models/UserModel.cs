@@ -14,20 +14,6 @@ namespace AccioBook.WepApi.Models
         public DateTime DateOfBirth { get; set; }
         public string Email { get; set; }
         private string _password;
-        public string Password { 
-            get 
-            {
-                return DecryptPassword(_password);
-            }
-            set 
-            {
-                _password = value;
-            } 
-        }
-
-        public static string DecryptPassword(string encriptedPassword)
-        {
-            return encriptedPassword.Decrypt(PASS_KEY);
-        }
+        public string Password { get; set; }
     }
 }

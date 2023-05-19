@@ -50,24 +50,24 @@ namespace AccioBook.CrossCutting.Criptografy.Test
 
         private bool GetUserTextEncryptAndShow()
         {
-            Console.WriteLine("Entre com o Texto para ser CRIPTOGRAFADO:");
-            string? textToEncrypt = Console.ReadLine();
-            if (!string.IsNullOrEmpty(textToEncrypt))
-                Console.WriteLine("CRIPTOGRAFADO: [{0}]", textToEncrypt.Encrypt(ENCRYPT_KEY));
-            else
-                Console.WriteLine("Etre um Valor não Nulo!");
+            //Console.WriteLine("Entre com o Texto para ser CRIPTOGRAFADO:");
+            //string? textToEncrypt = Console.ReadLine();
+            //if (!string.IsNullOrEmpty(textToEncrypt))
+            //    Console.WriteLine("CRIPTOGRAFADO: [{0}]", textToEncrypt.Encrypt(ENCRYPT_KEY));
+            //else
+            //    Console.WriteLine("Etre um Valor não Nulo!");
 
             return true;
         }
 
         private bool GetUserTextDecryptAndShow()
         {
-            Console.WriteLine("Entre com o Texto para ser DESCRIPTOGRAFADO (VALOR;IV):");
-            string? textToDecrypt = Console.ReadLine();
-            if (!string.IsNullOrEmpty(textToDecrypt))
-                Console.WriteLine("DESCRIPTOGRAFADO: [{0}]", textToDecrypt.Decrypt(ENCRYPT_KEY));
-            else
-                Console.WriteLine("Etre um Valor não Nulo!");
+            //Console.WriteLine("Entre com o Texto para ser DESCRIPTOGRAFADO (VALOR;IV):");
+            //string? textToDecrypt = Console.ReadLine();
+            //if (!string.IsNullOrEmpty(textToDecrypt))
+            //    Console.WriteLine("DESCRIPTOGRAFADO: [{0}]", textToDecrypt.Decrypt(ENCRYPT_KEY));
+            //else
+            //    Console.WriteLine("Etre um Valor não Nulo!");
 
             return true;
         }
