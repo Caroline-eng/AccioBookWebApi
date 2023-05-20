@@ -6,7 +6,6 @@ using AccioBook.Domain.Interfaces.Services;
 using AccioBook.Domain.Services;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Text.Json.Serialization;
@@ -21,8 +20,11 @@ namespace AccioBook.WepApi
         {
             ConfigRoot = configuration;
         }
-        public void ConfigureServices(IServiceCollection services)
-        {
+
+        public void ConfigureServices(IServiceCollection services) 
+        {                      
+        
+
             string connectionString = ConfigRoot.GetConnectionString("ClearDBConnection");
 
             // Configurar o serviço de banco de dados usando a string de conexão
@@ -68,7 +70,6 @@ namespace AccioBook.WepApi
                         .AllowAnyHeader());
             });
 
-            
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment env) 

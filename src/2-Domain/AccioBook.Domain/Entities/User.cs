@@ -6,8 +6,6 @@ namespace AccioBook.Domain.Entities
 {
     public class User
     {
-        public static string PASS_KEY { get { return "ACCIO_BD"; } }
-
         public Int64 Id { get; set; }
         public string Name { get; set; }
         public UserType UserType { get; set; }
@@ -20,22 +18,6 @@ namespace AccioBook.Domain.Entities
         public virtual ICollection<Access> AccessA { get; set; }
         public virtual ICollection<GenreSearch> GenreSearches { get; set; }
 
-        private string _password;
-        public string Password 
-        { 
-            get 
-            {
-                return _password;
-            }
-            set 
-            {
-                _password = value.Encrypt(PASS_KEY);
-            } 
-        }
-
-        public bool IsPassword(string password)
-        {
-            return _password.Decrypt(PASS_KEY) == password;
-        }
+        public string Password { get; set; }
     }
 } 

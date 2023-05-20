@@ -1,10 +1,10 @@
-﻿using AccioBook.Domain.Entities;
+﻿using AccioBook.CrossCutting.Criptografy;
+using AccioBook.Domain.Entities;
 using AccioBook.Domain.Interfaces.Services;
 using AccioBook.WepApi.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Cryptography;
-using System.Text;
+
 
 namespace AccioBook.WepApi.Controllers
 {
@@ -17,23 +17,10 @@ namespace AccioBook.WepApi.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
-        private readonly Aes _aes;
 
         public UserController(IUserService userService)
         {
             _userService = userService;
-
-            _aes = Aes.Create();
-
-            _aes.KeySize = 256; // usar um tamanho de chave de 256 bits
-            _aes.BlockSize = 128; // usar um bloco de tamanho fixo de 128 bits
-
-            byte[] key = Encoding.UTF8.GetBytes("uma chave fixa de 256 bits accio");
-            byte[] iv = Encoding.UTF8.GetBytes("um iv fixo de128");
-
-            _aes.Key = key;
-            _aes.IV = iv;
-
         }
 
         /// <summary>
@@ -43,10 +30,17 @@ namespace AccioBook.WepApi.Controllers
         [HttpPost("insert")]
         public async Task<IActionResult> Insert(UserModel userArgs)
         {
+            var existingUser = await _userService.GetUserByEmail(userArgs.Email);
+            if (existingUser != null)
+            {
+                return BadRequest("O email já está em uso.");
+            }
+
+
             var user = new User();
             user.Name = userArgs.Name;
             user.UserType = userArgs.UserType;
-            user.Password = userArgs.Password;
+            user.Password = userArgs.Password.Encrypt();
             user.UserGender = userArgs.UserGender;
             user.DateOfBirth = userArgs.DateOfBirth;
             user.Email = userArgs.Email;
@@ -59,7 +53,7 @@ namespace AccioBook.WepApi.Controllers
             }
 
             return BadRequest();
-        }     
+        }
 
         /// <summary>
         /// Valida o login de um usuário.
@@ -75,15 +69,18 @@ namespace AccioBook.WepApi.Controllers
                 return BadRequest("Email inválido!");
             }
 
-            string decryptedPassword = UserModel.DecryptPassword(password);
-            if (user.IsPassword(decryptedPassword))
-            {
-                return Ok(user);
-            }
-            else
-            {
-                return BadRequest("Senha inválida!");
-            }
-        }
+            var userPassword = user.Password.Decrypt();
+
+            if (!userPassword.Equals(password))
+                BadRequest("Senha inválida!");
+
+            return Ok(user);
+        }              
+        
     }
 }
+
+
+
+  
+
