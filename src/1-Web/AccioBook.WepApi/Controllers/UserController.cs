@@ -4,8 +4,7 @@ using AccioBook.Domain.Interfaces.Services;
 using AccioBook.WepApi.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Cryptography;
-using System.Text;
+
 
 namespace AccioBook.WepApi.Controllers
 {
@@ -31,6 +30,13 @@ namespace AccioBook.WepApi.Controllers
         [HttpPost("insert")]
         public async Task<IActionResult> Insert(UserModel userArgs)
         {
+            var existingUser = await _userService.GetUserByEmail(userArgs.Email);
+            if (existingUser != null)
+            {
+                return BadRequest("O email já está em uso.");
+            }
+
+
             var user = new User();
             user.Name = userArgs.Name;
             user.UserType = userArgs.UserType;
@@ -65,33 +71,16 @@ namespace AccioBook.WepApi.Controllers
 
             var userPassword = user.Password.Decrypt();
 
-            if (!user.Password.Equals(password))
+            if (!userPassword.Equals(password))
                 BadRequest("Senha inválida!");
 
             return Ok(user);
-        }
-
-
-        ///// <summary>
-        ///// Valida o login de um usuário.
-        ///// </summary>     
-        ///// <returns></returns>  
-        //[HttpPost("login/{email}/{password}")]
-        //public async Task<IActionResult> Login(UserModel userArgs)
-        //{
-        //    var user = await _userService.GetUserByEmail(userArgs.Email);
-
-        //    if (user == null)
-        //    {
-        //        return BadRequest("Email inválido!");
-        //    }
-
-        //    var userPassword = user.Password.Decrypt();
-
-        //    if (!userArgs.Password.Equals(userPassword))
-        //        BadRequest("Senha inválida!");
-
-        //    return Ok(user);
-        //}
+        }              
+        
     }
 }
+
+
+
+  
+

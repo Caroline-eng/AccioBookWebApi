@@ -21,8 +21,10 @@ namespace AccioBook.WepApi
             ConfigRoot = configuration;
         }
 
-        public void ConfigureServices(IServiceCollection services)
-        {
+        public void ConfigureServices(IServiceCollection services) 
+        { 
+                        
+        
             string connectionString = ConfigRoot.GetConnectionString("ClearDBConnection");
 
             // Configurar o serviço de banco de dados usando a string de conexão
