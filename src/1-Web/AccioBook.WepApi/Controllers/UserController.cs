@@ -53,7 +53,7 @@ namespace AccioBook.WepApi.Controllers
         /// Valida o login de um usuário.
         /// </summary>     
         /// <returns></returns>  
-        [HttpPost("login")]
+        [HttpPost("login/{email}/{password}")]
         public async Task<IActionResult> Login(string email, string password)
         {
             var user = await _userService.GetUserByEmail(email);
@@ -65,10 +65,33 @@ namespace AccioBook.WepApi.Controllers
 
             var userPassword = user.Password.Decrypt();
 
-            if (!password.Equals(userPassword))
+            if (!user.Password.Equals(password))
                 BadRequest("Senha inválida!");
 
             return Ok(user);
         }
+
+
+        ///// <summary>
+        ///// Valida o login de um usuário.
+        ///// </summary>     
+        ///// <returns></returns>  
+        //[HttpPost("login/{email}/{password}")]
+        //public async Task<IActionResult> Login(UserModel userArgs)
+        //{
+        //    var user = await _userService.GetUserByEmail(userArgs.Email);
+
+        //    if (user == null)
+        //    {
+        //        return BadRequest("Email inválido!");
+        //    }
+
+        //    var userPassword = user.Password.Decrypt();
+
+        //    if (!userArgs.Password.Equals(userPassword))
+        //        BadRequest("Senha inválida!");
+
+        //    return Ok(user);
+        //}
     }
 }

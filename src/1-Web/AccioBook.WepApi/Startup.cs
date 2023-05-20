@@ -60,7 +60,6 @@ namespace AccioBook.WepApi
                         .AllowAnyHeader());
             });
 
-            //services.AddScoped<IAuthorService, AuthorService>(); //não sei se está certo
         }
 
         public void Configure(WebApplication app, IWebHostEnvironment env) 
