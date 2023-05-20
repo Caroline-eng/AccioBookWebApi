@@ -65,7 +65,7 @@ namespace AccioBook.WepApi.Controllers
         /// Valida o login de um usuário.
         /// </summary>     
         /// <returns></returns>  
-        [HttpPost("login")]
+        [HttpPost("login/{email}/{password}")]
         public async Task<IActionResult> Login(string email, string password)
         {
             var user = await _userService.GetUserByEmail(email);
