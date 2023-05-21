@@ -22,15 +22,14 @@ namespace AccioBook.WepApi
         }
 
         public void ConfigureServices(IServiceCollection services) 
-        { 
-                        
+        {                      
         
+
             string connectionString = ConfigRoot.GetConnectionString("ClearDBConnection");
 
             // Configurar o serviço de banco de dados usando a string de conexão
             services.AddDbContext<DbContext>(options =>
                 options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
-
 
 
             SerilogExtension.AddLogging(ConfigRoot);
