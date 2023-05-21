@@ -10,5 +10,13 @@ namespace AccioBook.Data.Repositories
         {
 
         }
+              
+
+        public Task<IQueryable<Edition>> GetLastEditionsTop100()
+        {
+            var context = (AccioBookContext)_context;
+            var entities = context.Editions;
+            return Task.Run(() => { return entities.OrderByDescending(x => x.Id).Take(100); });
+        }
     }
 }

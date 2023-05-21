@@ -10,5 +10,18 @@ namespace AccioBook.Domain.Services
         {
 
         }
+
+        public async Task<IEnumerable<Publisher>> GetLastPublishersTop100()
+        {
+            var repo = (IPublisherRepository)_repository;
+            return await repo.GetLastPublishersTop100();
+          
+        }
+
+        public async Task<IEnumerable<Publisher>> GetPublisherByNameAsync(string publisherName)
+        {
+            var repo = (IPublisherRepository)_repository;
+            return await repo.GetPublisherByNameAsync(publisherName);
+        }
     }
 }

@@ -2,7 +2,8 @@
 
 namespace AccioBook.Domain.Interfaces.Services
 {
-    public interface IEditionService : IDatabaseService<Edition>  
+    public interface IEditionService : IDatabaseService<Edition>
     {
+        Task <IEnumerable<Edition>> GetLastEditionsTop100();
     }
 }
