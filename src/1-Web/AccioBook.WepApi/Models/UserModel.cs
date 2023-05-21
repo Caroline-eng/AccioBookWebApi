@@ -5,7 +5,9 @@ using System.Text.Json.Serialization;
 
 namespace AccioBook.WepApi.Models
 {
-    //
+    /// 
+    /// 
+    /// 
     public class UserModel
     {
 
