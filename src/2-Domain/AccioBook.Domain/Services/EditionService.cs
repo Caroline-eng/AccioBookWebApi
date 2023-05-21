@@ -10,6 +10,12 @@ namespace AccioBook.Domain.Services
         {
 
         }
+
+        public async Task<IEnumerable<Edition>> GetLastEditionsTop100()
+        {
+            var repo = (IEditionRepository)_repository;
+            return await repo.GetLastEditionsTop100();
+        }
     }
 
 }
